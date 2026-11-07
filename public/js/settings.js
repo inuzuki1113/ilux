@@ -27,7 +27,7 @@ export const DEFAULTS = {
   windowChrome: "macos",     // "macos" | "windows"
 
   // Lock / panic.
-  lockEnabled: true,         // require phrase on cold start
+  lockEnabled: false,         // require phrase on cold start
   lockPhrase: "a",           // minimal default; user changes it
   lockPassword: "",          // new create-password flow (overrides lockPhrase)
   lockOnIdle: true,          // re-lock after idle
