@@ -1,3 +1,4 @@
+import { BACKEND_WS_URL } from "./backend.js";
 // Transport setup. Both UV and Scramjet tunnel through a wisp WebSocket using
 // a transport (Epoxy for UV, libcurl for Scramjet). bare-mux exposes
 // BareMuxConnection as a named ESM export; we attach it to window.BareMux so
@@ -34,8 +35,7 @@ export function setTransport(transportPath, options) {
 // loaded but failed at wasm instantiation with a 500. Epoxy's wasm IS shipped,
 // and bare-mux makes the transport swappable, so both engines use Epoxy.
 export async function setTransportFor(_engineName) {
-  const proto = location.protocol === "https:" ? "wss" : "ws";
-  const wispUrl = `${proto}://${location.host}/wisp/`;
+  const wispUrl = BACKEND_WS_URL + "/wisp/";
   return setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
 }
 

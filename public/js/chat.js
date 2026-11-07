@@ -1,3 +1,4 @@
+import { BACKEND_WS_URL } from "./backend.js";
 // Chatroom. Simple WebSocket-based chat with in-memory history.
 
 const $ = (id) => document.getElementById(id);
@@ -46,8 +47,7 @@ export function initChat() {
 }
 
 function connect() {
-  const proto = location.protocol === "https:" ? "wss" : "ws";
-  const url = proto + "://" + location.host + "/chat/";
+  const url = BACKEND_WS_URL + "/chat/";
 
   try {
     ws = new WebSocket(url);

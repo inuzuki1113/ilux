@@ -1,3 +1,4 @@
+import { BACKEND_URL } from "./backend.js";
 // Games / emulator. Enhanced: shows category tabs with curated web games,
 // ROM folder picker, and 3kh0 embed option.
 //
@@ -250,7 +251,7 @@ function launchGameUrl(url) {
     const tab = createTab();
     navigateTab(tab.id, url, true);
   } else {
-    window.open("/api/tv-proxy?url=" + encodeURIComponent(url), "_blank");
+    window.open(BACKEND_URL + "/api/tv-proxy?url=" + encodeURIComponent(url), "_blank");
   }
 }
 

@@ -1,3 +1,4 @@
+import { BACKEND_WS_URL } from "./backend.js";
 // Scramjet v2 transport. Tinf0il uses the libcurl transport (libcurl-client.js)
 // which has the exact interface the Scramjet runtime expects (init, request,
 // connect with the right argument formats). The libcurl wasm is embedded in
@@ -14,8 +15,7 @@ async function getLibcurlTransport() {
   if (libcurlClient) return libcurlClient;
   // Load the libcurl client IIFE (sets window.LibcurlTransport).
   await loadClassicScriptInternal("/clients/index.js");
-  const proto = location.protocol === "https:" ? "wss" : "ws";
-  const wispUrl = proto + "://" + location.host + "/wisp/";
+  const wispUrl = BACKEND_WS_URL + "/wisp/";
   const LibcurlClient = window.LibcurlTransport?.LibcurlClient;
   if (!LibcurlClient) throw new Error("LibcurlTransport.LibcurlClient not found after loading libcurl");
   libcurlClient = new LibcurlClient({ wisp: wispUrl });

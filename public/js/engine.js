@@ -1,3 +1,4 @@
+import { BACKEND_URL, BACKEND_WS_URL } from "./backend.js";
 // Engine abstraction. Lux supports multiple interception engines (Ultraviolet
 // by default; Scramjet optional). Both speak to the same wisp backend, but
 // their client wiring differs, so we hide that behind one interface.
@@ -122,8 +123,7 @@ const uv = {
     // After the SW claims the page, re-set the transport so the SW can
     // connect to the bare-mux SharedWorker with the new MessagePort.
     try {
-      const proto = location.protocol === "https:" ? "wss" : "ws";
-      const wispUrl = proto + "://" + location.host + "/wisp/";
+      const wispUrl = BACKEND_WS_URL + "/wisp/";
       await setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
     } catch (e) { console.warn("[lux] transport reset:", e); }
     return reg;
@@ -256,7 +256,7 @@ const scramjet = {
       scramjetController = null;
     }
     // Fallback: server-proxy mode
-    iframe.src = "/sj-proxy?url=" + encodeURIComponent(targetUrl);
+    iframe.src = BACKEND_URL + "/sj-proxy?url=" + encodeURIComponent(targetUrl);
   },
 };
 

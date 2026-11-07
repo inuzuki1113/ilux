@@ -1,3 +1,4 @@
+import { BACKEND_URL } from "./backend.js";
 // TV / Live Tab panel. App-dashboard style (inspired by tinf0il.site/tv).
 // Shows app cards (YouTube, Discord, etc.) in a grid that load proxied via
 // /api/tv-proxy. URL input for any custom site.
@@ -97,7 +98,7 @@ async function loadUrl(input) {
   home.style.display = "none";
   player.style.display = "flex";
   currentFrame = frame;
-  frame.src = "/api/tv-proxy?url=" + encodeURIComponent(url);
+  frame.src = BACKEND_URL + "/api/tv-proxy?url=" + encodeURIComponent(url);
 }
 
 // Add a custom app card
