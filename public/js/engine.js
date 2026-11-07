@@ -161,7 +161,7 @@ async function tryInitController() {
     const { loadClassicScript, registerSw, createScramjetTransport } = await import("./scramjet-transport.js");
 
     // Load the scramjet v2 runtime IIFE (Tinf0il serves this at /scram/)
-    await loadClassicScript("/scram/scramjet.js");
+    await loadClassicScript("/scramjet/scramjet.js");
     if (typeof globalThis.$scramjet === "undefined") {
       throw new Error("scramjet.js did not set globalThis.$scramjet");
     }
@@ -181,9 +181,9 @@ async function tryInitController() {
     // Modify controller config in-place (Tinf0il pattern)
     const { Controller, config } = globalThis.$scramjetController;
     config.prefix = PREFIX_SJ;
-    config.scramjetPath = "/scram/scramjet.js";
+    config.scramjetPath = "/scramjet/scramjet.js";
     config.injectPath = "/controller/controller.inject.js";
-    config.wasmPath = "/scram/scramjet.wasm";
+    config.wasmPath = "/scramjet/scramjet.wasm";
     console.log("[lux] SJ config prefix:", config.prefix);
 
     const controller = new Controller({
